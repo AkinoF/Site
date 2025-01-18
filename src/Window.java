@@ -1,48 +1,36 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Window {
     JFrame frame;
-    private CardLayout cardLayout;
-    private JPanel mainPanel;
-    public Map<String, String> users = new HashMap<>();
+    LoginPanel loginPanel;
+    RegisterPanel registerPanel;
 
     public Window() {
-        frame = new JFrame("Авторизация");
-        cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
-
-        // Создаем панель авторизации
-        JPanel loginPanel = new LoginPanel(this);
-        mainPanel.add(loginPanel, "login");
-
-        // Создаем панель регистрации
-        JPanel registerPanel = new RegisterPanel(this);
-        mainPanel.add(registerPanel, "register");
-
-        frame.add(mainPanel);
+        frame = new JFrame("Панель Входа и Регистрации");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
+        frame.setSize(400, 200);
+        frame.setLayout(new BorderLayout());
+
+        loginPanel = new LoginPanel(this);
+        registerPanel = new RegisterPanel(this);
+
+        frame.add(loginPanel, BorderLayout.CENTER);
         frame.setVisible(true);
-        cardLayout.show(mainPanel, "login");
-    }
-
-    public void addUser(String login, String password) {
-        users.put(login, password);
-        FileUtils.saveToFile(login, password);
-    }
-
-    public boolean authenticate(String login, String password) {
-        return users.containsKey(login) && users.get(login).equals(password);
     }
 
     public void switchToRegister() {
-        cardLayout.show(mainPanel, "register");
+        frame.getContentPane().removeAll();
+        frame.add(registerPanel, BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
     }
+
     public void switchToLogin() {
-        cardLayout.show(mainPanel, "login");
+        frame.getContentPane().removeAll();
+        frame.add(loginPanel, BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
     }
 
     public static void main(String[] args) {
