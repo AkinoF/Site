@@ -33,7 +33,8 @@ public class LoginPanel extends JPanel {
                 String login = loginField.getText();
                 String password = new String(passwordField.getPassword());
                 if (authenticateUser(login, password)) {
-                    JOptionPane.showMessageDialog(app.frame, "Привет!");
+                    JOptionPane.showMessageDialog(app.frame, "Зря ты сюда полез.");
+                    System.out.println("Добро пожаловать в Сити 17. Сами вы его выбрали, или его выбрали за вас — это лучший город из оставшихся. Я такого высокого мнения о Сити 17, что решил разместить свое правительство здесь, в Цитадели, столь заботливо предоставленной нашими Покровителями. Я горжусь тем, что называю Сити 17 своим домом."); // Вывод фразы в консоль
                 } else {
                     JOptionPane.showMessageDialog(app.frame, "НЕПРАВИЛЬНО.");
                 }
